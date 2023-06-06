@@ -7,9 +7,7 @@ $ sudo npm install -g nodemon
 ```
 
 ```shell
-//JSON.parse() method used to convert the json file to object
-  JSON.parse()
-  
-//get status: 200
-//post status: 201
+* JSON.parse() method used to convert the json file to object
+* get status: 200
+* post status: 201
 ```
