@@ -66,20 +66,33 @@ app.post('/api/v1/nfts',(req,res)=>{
     });
 });
 
+
+// get NFT by id
+app.get('/api/v1/nfts/:id',(req,res)=>{
+    //to convert the id into int
+    const id=parseInt(req.params.id);
+    //const id= req.params.id *1;
+    const nft=nfts.find((el) => el.id === id);
+    console.log(nft);
+
+    if(!nft){
+        return res.status(404).json({
+            status:"failed",
+            message:"Invalid ID",
+        });
+    }
+    res.status(200).json({
+        status:"success",
+        data:{
+            nft,
+        },
+    });
+});
+
+
 const port=8000;
 app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
 });
 
 
-// Output 
-// {
-//     "status": "success",
-//     "nft": {
-//         "id": 9,
-//         "name": "Jacob",
-//         "duration": 10,
-//         "maxGroupSize": 25,
-//         "difficulty": "easy"
-//     }
-// }
