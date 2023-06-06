@@ -29,7 +29,7 @@ app.use(express.json());
 
 //JSON.parse() used to convert the json file to object
 const nfts=JSON.parse(
-    fs.readFileSync(`${__dirname}/nft-data/data/nft-simple.json`)
+    fs.readFileSync(`${__dirname}/nft-data/data/nft-sample.json`)
 );
 
 //console.log(nfts);
@@ -48,12 +48,38 @@ app.get('/api/v1/nfts',(req,res)=>{
 //post status: 201 
 app.post('/api/v1/nfts',(req,res)=>{
     //console.log(req);
-    console.log(req.body);
-    res.send("Post NFT");
-        
+    // console.log(req.body);
+
+    // add the new nft data into nft-sample.json file
+    const newID=nfts[nfts.length-1].id +1;
+    const newNFTs=Object.assign({id:newID},req.body);
+    nfts.push(newNFTs);
+    
+    // write in the existing nft-simple.json file
+    fs.writeFile(`${__dirname}/nft-data/data/nft-sample.json`,
+        JSON.stringify(nfts),
+        (err)=>{
+        res.status(201).json({
+            status:"success",
+            nft :newNFTs
+        });
+    });
 });
 
 const port=8000;
 app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
 });
+
+
+// Output 
+// {
+//     "status": "success",
+//     "nft": {
+//         "id": 9,
+//         "name": "Jacob",
+//         "duration": 10,
+//         "maxGroupSize": 25,
+//         "difficulty": "easy"
+//     }
+// }
