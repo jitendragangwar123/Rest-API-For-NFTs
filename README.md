@@ -16,3 +16,14 @@ $ sudo npm install -g nodemon
 * Express Middleware :- Which allow us to read the data from the user and write our document.
   app.use(express.json());
 ```
+```shell
+//to convert the id into int
+  const id=parseInt(req.params.id);
+  or
+  const id= req.params.id *1; 
+```
+
+```shell
+patch method :- Update the only desired value from the database.
+put method :- Update the whole database 
+```
