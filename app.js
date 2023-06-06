@@ -90,6 +90,48 @@ app.get('/api/v1/nfts/:id',(req,res)=>{
 });
 
 
+// patch method 
+app.patch('/api/v1/nfts/:id',(req,res)=>{
+    const id=parseInt(req.params.id);
+    const nft=nfts.find((el) => el.id === id);
+    console.log(nft);
+
+    if(!nft){
+        return res.status(404).json({
+            status:"failed",
+            message:"Invalid ID",
+        });
+    }
+    res.status(200).json({
+        status:"success",
+        data:{
+            nft:"Updating NFT data",
+        }
+    });
+});
+
+// delete method
+app.delete('/api/v1/nfts/:id',(req,res)=>{
+    const id=parseInt(req.params.id);
+    const nft=nfts.find((el) => el.id === id);
+    console.log(nft);
+
+    if(!nft){
+        return res.status(404).json({
+            status:"failed",
+            message:"Invalid ID",
+        });
+    }
+
+    res.status(204).json({
+        status:"success",
+        data:null,
+    });
+});
+
+
+
+
 const port=8000;
 app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
