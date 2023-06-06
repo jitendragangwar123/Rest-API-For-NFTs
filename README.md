@@ -11,3 +11,8 @@ $ sudo npm install -g nodemon
 * get status: 200
 * post status: 201
 ```
+
+```shell
+* Express Middleware :- Which allow us to read the data from the user and write our document.
+  app.use(express.json());
+```
