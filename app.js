@@ -2,6 +2,9 @@ const fs=require("fs");
 const express=require("express");
 const app=express();
 
+//express middleware
+app.use(express.json());
+
 
 // app.get('/',(req,res)=>{
 //     res.status(200).send("Hello I am Jitendra!");
@@ -29,10 +32,9 @@ const nfts=JSON.parse(
     fs.readFileSync(`${__dirname}/nft-data/data/nft-simple.json`)
 );
 
-console.log(nfts);
+//console.log(nfts);
 
 //get status: 200
-//post status: 201
 app.get('/api/v1/nfts',(req,res)=>{
     res.status(200).json({
         status:"success",
@@ -40,8 +42,17 @@ app.get('/api/v1/nfts',(req,res)=>{
         data:{
             nfts:nfts
         }
-    })
-})
+    });
+});
+
+//post status: 201 
+app.post('/api/v1/nfts',(req,res)=>{
+    //console.log(req);
+    console.log(req.body);
+    res.send("Post NFT");
+        
+});
+
 const port=8000;
 app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
