@@ -15,6 +15,14 @@ app.get('/',(req,res)=>{
 });
 
 
+app.post('/',(req,res)=>{
+    res.status(201)
+    .json({
+         message:"Hii"
+     });
+ });
+ 
+
 const port=8000;
 app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
