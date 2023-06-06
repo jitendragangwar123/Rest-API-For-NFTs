@@ -8,8 +8,10 @@ $ sudo npm install -g nodemon
 
 ```shell
 * JSON.parse() method used to convert the json file to object
-* get status: 200
-* post status: 201
+* get status: 200 (OK)
+* post status: 201 (created)
+* Error status: 404 (Not Found)
+* Null status: 202 (No content)
 ```
 
 ```shell
@@ -26,4 +28,5 @@ $ sudo npm install -g nodemon
 ```shell
 patch method :- Update the only desired value from the database.
 put method :- Update the whole database 
+delete method :- Delete the whole database
 ```
