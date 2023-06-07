@@ -185,13 +185,22 @@ const deleteUser=(req,res)=>{
 // app.patch('/api/v1/nfts/:id',patchNFT);
 // app.delete('/api/v1/nfts/:id',deleteNFT);
 
+// seperate the routes
+const nftsRouter=express.Router();
+const usersRouter=express.Router();
+
+
 //routes for nfts
-app.route('/api/v1/nfts').get(getAllNFTs).post(addNFT);
-app.route('/api/v1/nfts/:id').get(getNFTById).patch(patchNFT).delete(deleteNFT);
+nftsRouter.route('/').get(getAllNFTs).post(addNFT);
+nftsRouter.route('/:id').get(getNFTById).patch(patchNFT).delete(deleteNFT);
 
 //routes for users
-app.route('/api/v1/users').get(getAllUsers).post(createUser);
-app.route('/api/v1/users/:id').get(getSingleUser).patch(updateUser).delete(deleteUser);
+usersRouter.route('/').get(getAllUsers).post(createUser);
+usersRouter.route('/:id').get(getSingleUser).patch(updateUser).delete(deleteUser);
+
+//middleware 
+app.use('/api/v1/nfts',nftsRouter);
+app.use('/api/v1/users',usersRouter);
 
 const port=8000;
 //to start the server
