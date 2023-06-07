@@ -35,7 +35,6 @@ const nfts=JSON.parse(
 //console.log(nfts);
 
 //get NFT
-
 const getAllNFTs=(req,res)=>{
     res.status(200).json({
         status:"success",
@@ -45,9 +44,6 @@ const getAllNFTs=(req,res)=>{
         }
     });
 };
-
-app.get('/api/v1/nfts',getAllNFTs);
-
 //post NFT
 const addNFT=(req,res)=>{
     //console.log(req);
@@ -67,10 +63,7 @@ const addNFT=(req,res)=>{
             nft :newNFTs
         });
     });
-}
-app.post('/api/v1/nfts',addNFT);
-
-
+};
 // get NFT by id
 const getNFTById=(req,res)=>{
     //to convert the id into int
@@ -91,12 +84,8 @@ const getNFTById=(req,res)=>{
             nft,
         },
     });
-}
-
-app.get('/api/v1/nfts/:id',getNFTById);
-
-
-// patch method 
+};
+// patch NFT
 const patchNFT=(req,res)=>{
     const id=parseInt(req.params.id);
     const nft=nfts.find((el) => el.id === id);
@@ -114,11 +103,8 @@ const patchNFT=(req,res)=>{
             nft:"Updating NFT data",
         }
     });
-}
-
-app.patch('/api/v1/nfts/:id',patchNFT);
-
-// delete method
+};
+// delete NFT
 const deleteNFT=(req,res)=>{
     const id=parseInt(req.params.id);
     const nft=nfts.find((el) => el.id === id);
@@ -135,12 +121,14 @@ const deleteNFT=(req,res)=>{
         status:"success",
         data:null,
     });
-}
+};
 
+//routes
+app.get('/api/v1/nfts',getAllNFTs);
+app.post('/api/v1/nfts',addNFT);
+app.get('/api/v1/nfts/:id',getNFTById);
+app.patch('/api/v1/nfts/:id',patchNFT);
 app.delete('/api/v1/nfts/:id',deleteNFT);
-
-
-
 
 const port=8000;
 //to start the server
