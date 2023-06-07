@@ -15,7 +15,7 @@ $ sudo npm install -g nodemon
 ```
 
 ```shell
-* Express Middleware :- Which allow us to read the data from the user and write our document.
+* Express Middleware :- Which allow us to read the data from the user(postman body) and write our document.
   app.use(express.json());
 ```
 ```shell
@@ -29,4 +29,10 @@ $ sudo npm install -g nodemon
 patch method :- Update the only desired value from the database.
 put method :- Update the whole database 
 delete method :- Delete the whole database
+```
+
+```shell
+* Custom middleware : Every time it will be execute whenever any request will be send.
+* morgan : used as a middleware to identify the request.
+  $ npm i morgan
 ```
