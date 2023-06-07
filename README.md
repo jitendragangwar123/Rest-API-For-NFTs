@@ -12,6 +12,8 @@ $ sudo npm install -g nodemon
 * post status: 201 (created)
 * Error status: 404 (Not Found)
 * Null status: 202 (No content)
+* Internal Server Error: 500 
+* Missing Params: 400 (bad request)
 ```
 
 ```shell
@@ -35,4 +37,10 @@ delete method :- Delete the whole database
 * Custom middleware : Every time it will be execute whenever any request will be send.
 * morgan : used as a middleware to identify the request.
   $ npm i morgan
+```
+
+```shell 
+MVC Model: Model-Veiw-Controller
+Seving Template: Access the static files using express
+app.use(express.static(`${__dirname}/nft-data/img`));
 ```
