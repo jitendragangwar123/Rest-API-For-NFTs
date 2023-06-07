@@ -5,6 +5,36 @@ const nfts=JSON.parse(
     fs.readFileSync(`${__dirname}/../nft-data/data/nft-sample.json`)
 );
 
+//middleware for checking the existing NFT ID 
+exports.checkId=(req,res,next,value)=>{
+    //to convert the id into int
+    console.log(`ID:${value}`);
+    const id=parseInt(req.params.id);
+    //const id= req.params.id *1;
+    const nft=nfts.find((el) => el.id === id);
+    //console.log(nft);
+
+    if(!nft){
+        return res.status(404).json({
+            status:"failed",
+            message:"Invalid ID",
+        });
+    };
+    next();
+};
+
+//middleware for checking the body params
+exports.checkBody=(req,res,next)=>{
+    if(!req.body.name || !req.body.price){
+        return res.status(400).json({
+            status:"failed",
+            message:"Missing name and price",
+        });
+    };
+    next();
+}
+
+
 //get NFT
 exports.getAllNFTs=(req,res)=>{
     console.log(req.requestTime);
@@ -41,18 +71,10 @@ exports.addNFT=(req,res)=>{
 
 // get NFT by id
 exports.getNFTById=(req,res)=>{
-    //to convert the id into int
     const id=parseInt(req.params.id);
     //const id= req.params.id *1;
     const nft=nfts.find((el) => el.id === id);
-    console.log(nft);
-
-    if(!nft){
-        return res.status(404).json({
-            status:"failed",
-            message:"Invalid ID",
-        });
-    }
+    //console.log(nft);
     res.status(200).json({
         status:"success",
         data:{
@@ -61,18 +83,8 @@ exports.getNFTById=(req,res)=>{
     });
 };
 
-// patch NFT
-exports.patchNFT=(req,res)=>{
-    const id=parseInt(req.params.id);
-    const nft=nfts.find((el) => el.id === id);
-    console.log(nft);
-
-    if(!nft){
-        return res.status(404).json({
-            status:"failed",
-            message:"Invalid ID",
-        });
-    }
+// Update NFT
+exports.updateNFT=(req,res)=>{
     res.status(200).json({
         status:"success",
         data:{
@@ -83,17 +95,6 @@ exports.patchNFT=(req,res)=>{
 
 // delete NFT
 exports.deleteNFT=(req,res)=>{
-    const id=parseInt(req.params.id);
-    const nft=nfts.find((el) => el.id === id);
-    console.log(nft);
-
-    if(!nft){
-        return res.status(404).json({
-            status:"failed",
-            message:"Invalid ID",
-        });
-    }
-
     res.status(204).json({
         status:"success",
         data:null,
