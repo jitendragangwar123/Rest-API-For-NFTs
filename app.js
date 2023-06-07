@@ -8,13 +8,13 @@ app.use(express.json());
 //morgan used as a middleware to identify the request
 app.use(morgan("dev"));
 
-//Custom middleware : every time it will execute whenever any fuction call
+//Custom middleware : Every time it will execute whenever any fuction call
 app.use((req,res,next)=>{
     console.log("Hii I am the middleware!!");
     next();
 });
 
-
+//custom middleware
 app.use((req,res,next)=>{
     req.requestTime=new Date().toISOString();
     //console.log(req.requestTime);
@@ -140,6 +140,44 @@ const deleteNFT=(req,res)=>{
     });
 };
 
+//-------User Section 
+
+const getAllUsers=(req,res)=>{
+    res.status(500).json({
+        status:"error",
+        message:"Internal Server Error",
+    });
+};
+
+const createUser=(req,res)=>{
+    res.status(500).json({
+        status:"error",
+        message:"Internal Server Error",
+    });
+};
+
+const getSingleUser=(req,res)=>{
+    res.status(500).json({
+        status:"error",
+        message:"Internal Server Error",
+    });
+};
+
+const updateUser=(req,res)=>{
+    res.status(500).json({
+        status:"error",
+        message:"Internal Server Error",
+    });
+};
+
+const deleteUser=(req,res)=>{
+    res.status(500).json({
+        status:"error",
+        message:"Internal Server Error",
+    });
+};
+
+
 //routes
 // app.get('/api/v1/nfts',getAllNFTs);
 // app.post('/api/v1/nfts',addNFT);
@@ -147,9 +185,13 @@ const deleteNFT=(req,res)=>{
 // app.patch('/api/v1/nfts/:id',patchNFT);
 // app.delete('/api/v1/nfts/:id',deleteNFT);
 
+//routes for nfts
 app.route('/api/v1/nfts').get(getAllNFTs).post(addNFT);
 app.route('/api/v1/nfts/:id').get(getNFTById).patch(patchNFT).delete(deleteNFT);
 
+//routes for users
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+app.route('/api/v1/users/:id').get(getSingleUser).patch(updateUser).delete(deleteUser);
 
 const port=8000;
 //to start the server
