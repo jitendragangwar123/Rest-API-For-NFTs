@@ -1,10 +1,25 @@
 const fs=require("fs");
 const express=require("express");
+const morgan=require("morgan");
 const app=express();
 
 //express middleware
 app.use(express.json());
+//morgan used as a middleware to identify the request
+app.use(morgan("dev"));
 
+//Custom middleware : every time it will execute whenever any fuction call
+app.use((req,res,next)=>{
+    console.log("Hii I am the middleware!!");
+    next();
+});
+
+
+app.use((req,res,next)=>{
+    req.requestTime=new Date().toISOString();
+    //console.log(req.requestTime);
+    next();
+});
 
 // app.get('/',(req,res)=>{
 //     res.status(200).send("Hello I am Jitendra!");
@@ -36,8 +51,10 @@ const nfts=JSON.parse(
 
 //get NFT
 const getAllNFTs=(req,res)=>{
+    console.log(req.requestTime);
     res.status(200).json({
         status:"success",
+        requestTime:req.requestTime,
         results:nfts.length,
         data:{
             nfts:nfts
