@@ -124,14 +124,19 @@ const deleteNFT=(req,res)=>{
 };
 
 //routes
-app.get('/api/v1/nfts',getAllNFTs);
-app.post('/api/v1/nfts',addNFT);
-app.get('/api/v1/nfts/:id',getNFTById);
-app.patch('/api/v1/nfts/:id',patchNFT);
-app.delete('/api/v1/nfts/:id',deleteNFT);
+// app.get('/api/v1/nfts',getAllNFTs);
+// app.post('/api/v1/nfts',addNFT);
+// app.get('/api/v1/nfts/:id',getNFTById);
+// app.patch('/api/v1/nfts/:id',patchNFT);
+// app.delete('/api/v1/nfts/:id',deleteNFT);
+
+app.route('/api/v1/nfts').get(getAllNFTs).post(addNFT);
+app.route('/api/v1/nfts/:id').get(getNFTById).patch(patchNFT).delete(deleteNFT);
+
 
 const port=8000;
 //to start the server
 app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
 });
+
