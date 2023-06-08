@@ -224,8 +224,9 @@ const app=express();
 //express middleware
 app.use(express.json());
 //morgan used as a middleware to identify the request
-app.use(morgan("dev"));
-
+if(process.env.NODE_ENV==="development"){
+    app.use(morgan("dev"));
+}
 
 //Serving Template
 app.use(express.static(`${__dirname}/nft-data/img`));

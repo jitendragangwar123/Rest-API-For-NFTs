@@ -37,10 +37,21 @@ delete method :- Delete the whole database
 * Custom middleware : Every time it will be execute whenever any request will be send.
 * morgan : used as a middleware to identify the request.
   $ npm i morgan
+* Install morgan only for developemnt env
+  $ npm i morgan --save-dev  
 ```
 
 ```shell 
 MVC Model: Model-Veiw-Controller
 Seving Template: Access the static files using express
 app.use(express.static(`${__dirname}/nft-data/img`));
+```
+
+```shell
+.env file :
+  $ npm i dotenv
+// To start the application in development environment
+  $ npm start
+// To start the application in production environment
+  $ npm run start:prod   
 ```
