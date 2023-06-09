@@ -144,7 +144,6 @@ exports.createNFT=async (req,res)=>{
 };
 
 // get NFT by id
-
 exports.getNFTById=async (req,res)=>{
     try{
         const nft=await NFT.findById(req.params.id);
