@@ -21,14 +21,15 @@ mongoose
   });
 
 const nfts = JSON.parse(
-  fs.readFileSync(`${__dirname}/nft-simple.json`, "utf-8")
+  fs.readFileSync(`${__dirname}/nft-sample.json`, "utf-8")
 );
 
 //IMPORT DATA
-const importDate = async () => {
+const importData = async () => {
   try {
     await NFT.create(nfts);
     console.log("DATA successfully Loaded");
+    //terminate the server
     process.exit();
   } catch (error) {
     console.log(error);
@@ -40,14 +41,17 @@ const deleteData = async () => {
   try {
     await NFT.deleteMany();
     console.log("DATA successfully Deleted");
+    //terminate the server
     process.exit();
   } catch (error) {
     console.log(error);
   }
 };
 
+
+//argv show the location of file
 if (process.argv[2] === "--import") {
-  importDate();
+  importData();
 } else if (process.argv[2] === "--delete") {
   deleteData();
 }
