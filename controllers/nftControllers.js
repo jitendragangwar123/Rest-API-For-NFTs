@@ -147,8 +147,7 @@ exports.createNFT=async (req,res)=>{
 
 exports.getNFTById=async (req,res)=>{
     try{
-        const id=parseInt(req.params.id);
-        const nft=await NFT.findById(id);
+        const nft=await NFT.findById(req.params.id);
         //console.log(nft);
         res.status(200).json({
             status:"success",
@@ -165,19 +164,39 @@ exports.getNFTById=async (req,res)=>{
 };
 
 // Update NFT
-exports.updateNFT=(req,res)=>{
-    res.status(200).json({
-        status:"success",
-        data:{
-            nft:"Updating NFT data",
-        }
-    });
+exports.updateNFT=async (req,res)=>{
+    try{
+        const nft=await NFT.findByIdAndUpdate(req.params.id,req.body,{
+            //to get the updated data
+            new:true,
+            runValidators:true,
+        });
+        res.status(200).json({
+            status:"success",
+            data:{
+                nft,
+            }
+        });
+    } catch(error){
+        res.status(404).json({
+            status:"fail",
+            message:error,
+        });    
+    }
 };
 
 // delete NFT
-exports.deleteNFT=(req,res)=>{
-    res.status(204).json({
-        status:"success",
-        data:null,
-    });
+exports.deleteNFT=async (req,res)=>{
+    try{
+        await NFT.findByIdAndDelete(req.params.id)
+        res.status(204).json({
+            status:"success",
+            data:null,
+        });
+    } catch(error){
+        res.status(404).json({
+            status:"fail",
+            message:error,
+        });   
+    }
 };

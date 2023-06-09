@@ -60,3 +60,16 @@ app.use(express.static(`${__dirname}/nft-data/img`));
   $ npm install mongodb
   $ npm i mongoose@5.5.2
 ```
+
+```shell
+* Remove the folders and files from git
+  $ git rm -r "folder name"
+  $ git rm "file name"
+```
+
+```shell
+* Add the files in .gitigone file
+  $ echo ".env" >> .gitignore
+  $ git rm --cached .env
+  $ git add .gitignore
+```
