@@ -55,3 +55,8 @@ app.use(express.static(`${__dirname}/nft-data/img`));
 // To start the application in production environment
   $ npm run start:prod   
 ```
+```shell
+* MongoDB Connection :
+  $ npm install mongodb
+  $ npm i mongoose@5.5.2
+```
