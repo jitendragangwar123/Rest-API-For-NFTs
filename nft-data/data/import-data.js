@@ -1,3 +1,4 @@
+// If you want to push all the data from static file into DB then use this script
 const fs = require("fs");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -16,7 +17,7 @@ mongoose
     useNewUrlParser: true,
   })
   .then((con) => {
-    // console.log(con.connection);
+    //console.log(con.connection);
     console.log("DB Connection Successfully");
   });
 

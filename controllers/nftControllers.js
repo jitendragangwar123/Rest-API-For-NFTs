@@ -109,7 +109,19 @@ const NFT=require("./../models/nftModel");
 //get All NFTs
 exports.getAllNFTs=async (req,res)=>{
     try{
-        const nfts= await NFT.find();
+        // API Query
+        console.log(req.query);
+        //------ 1st method
+        // const nfts= await NFT.find({
+        //     duration:5,
+        // });
+        
+        //-------2nd method
+        //const nfts= await NFT.find().where("duration").equals(5).where("difficulty").equals("easy");
+
+        //------3rd method
+        const nfts=await NFT.find(req.query);
+        
         res.status(200).json({
             status:"success",
             results:nfts.length,
