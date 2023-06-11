@@ -120,8 +120,13 @@ exports.getAllNFTs=async (req,res)=>{
         //const nfts= await NFT.find().where("duration").equals(5).where("difficulty").equals("easy");
 
         //------3rd method
-        const nfts=await NFT.find(req.query);
+        const queryObj={...req.query};
+        const excludedFields=["page","sort","limit","fields"];
+        excludedFields.forEach((el)=>delete queryObj[el]);
+        console.log(req.query,queryObj);
         
+        const nfts=await NFT.find(req.query);
+
         res.status(200).json({
             status:"success",
             results:nfts.length,
