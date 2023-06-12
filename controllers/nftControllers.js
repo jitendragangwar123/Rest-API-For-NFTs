@@ -110,7 +110,7 @@ const NFT=require("./../models/nftModel");
 exports.getAllNFTs=async (req,res)=>{
     try{
         // API Query
-        console.log(req.query);
+        //console.log(req.query);
         //------ 1st method
         // const nfts= await NFT.find({
         //     duration:5,
@@ -120,13 +120,27 @@ exports.getAllNFTs=async (req,res)=>{
         //const nfts= await NFT.find().where("duration").equals(5).where("difficulty").equals("easy");
 
         //------3rd method
+
+        //BUILD QUREY
         const queryObj={...req.query};
         const excludedFields=["page","sort","limit","fields"];
         excludedFields.forEach((el)=>delete queryObj[el]);
-        console.log(req.query,queryObj);
-        
-        const nfts=await NFT.find(req.query);
 
+        //console.log(req.query,queryObj);
+
+        //ADVANCE FILTERING QUERY
+        let queryStr=JSON.stringify(queryObj);
+        queryStr=queryStr.replace(/\b(gte|gt|lte|lt)\b/g,(match)=>`$${match}`);
+        //console.log(JSON.parse(queryStr));
+
+        //EXECUTE QUERY
+        const query= NFT.find(JSON.parse(queryStr));
+        //console.log(query);
+        //{difficulty:"easy",duration:{$gte:5}}
+        //{difficulty:'easy',duration:{gte:'5'}}
+        //{difficulty:'easy',duration:{'$gte':'5'}}
+        const nfts=await query;
+        //send query
         res.status(200).json({
             status:"success",
             results:nfts.length,
