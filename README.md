@@ -68,7 +68,8 @@ app.use(express.static(`${__dirname}/nft-data/img`));
 ```
 
 ```shell
-* Add the files in .gitigone file
+* Add the config files in .gitigone file
+
   $ echo ".env" >> .gitignore
   $ git rm --cached .env
   $ git add .gitignore
