@@ -8,7 +8,7 @@
 // //morgan used as a middleware to identify the request
 // app.use(morgan("dev"));
 
-// //Custom middleware : Every time it will execute whenever any fuction call
+// //Custom middleware : Every time it will execute whenever any function call
 // app.use((req,res,next)=>{
 //     console.log("Hii I am the middleware!!");
 //     next();
@@ -234,7 +234,7 @@ app.use(morgan("dev"));
 app.use(express.static(`${__dirname}/nft-data/img`));
 
 
-//Custom middleware : Every time it will execute whenever any fuction call
+//Custom middleware : Every time it will execute whenever any function call
 app.use((req,res,next)=>{
     console.log("Hii I am the middleware!!");
     next();
