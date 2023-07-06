@@ -43,7 +43,7 @@ delete method :- Delete the whole database
 
 ```shell 
 MVC Model: Model-Veiw-Controller
-Seving Template: Access the static files using express
+Serving Template: Access the static files using express
 app.use(express.static(`${__dirname}/nft-data/img`));
 ```
 
